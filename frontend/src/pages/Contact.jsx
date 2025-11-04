@@ -168,150 +168,261 @@ export default function Contact() {
           >
             <h6 className="text-tech-primary fw-bold mb-2" style={{ letterSpacing: '1px' }}>GET IN TOUCH</h6>
             <h2 className="text-dark" style={{ fontSize: '1.3rem' }}>Send Us a Message</h2>
-            <p className="text-muted mb-0" style={{ fontSize: '0.95rem' }}>We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.</p>
           </motion.div>
 
-          <div className="row g-4">
+          <div className="row g-4 d-flex">
             {/* Contact Form */}
             <motion.div
-              className="col-lg-7"
+              className="col-lg-6 d-flex"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <form onSubmit={submit} className="d-flex flex-column" style={{ gap: '1.2rem' }}>
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold">Full Name <span className="text-danger">*</span></label>
-                    <input
-                      type="text"
+              <div style={{
+                background: 'rgba(135, 206, 250, 0.15)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1px solid rgba(135, 206, 250, 0.3)',
+                borderRadius: '12px',
+                padding: '1.5rem',
+                boxShadow: '0 4px 16px 0 rgba(31, 38, 135, 0.08)',
+                width: '100%'
+              }}>
+                <form onSubmit={submit} className="d-flex flex-column" style={{ gap: '1rem' }}>
+                  <div className="row g-2">
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold mb-1" style={{ color: '#2d3748', fontSize: '0.875rem' }}>
+                        Full Name <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="name"
+                        value={form.name}
+                        onChange={handleInputChange}
+                        required
+                        placeholder="Enter your full name"
+                        style={{ 
+                          borderRadius: '8px', 
+                          border: '1px solid rgba(135, 206, 250, 0.4)', 
+                          fontSize: '0.875rem',
+                          padding: '0.5rem 0.75rem',
+                          background: 'rgba(255, 255, 255, 0.6)',
+                          transition: 'all 0.3s ease'
+                        }}
+                        onFocus={(e) => {
+                          e.target.style.background = 'rgba(255, 255, 255, 0.9)';
+                          e.target.style.borderColor = 'rgba(135, 206, 250, 0.7)';
+                          e.target.style.boxShadow = '0 0 0 3px rgba(135, 206, 250, 0.2)';
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.background = 'rgba(255, 255, 255, 0.6)';
+                          e.target.style.borderColor = 'rgba(135, 206, 250, 0.4)';
+                          e.target.style.boxShadow = 'none';
+                        }}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold mb-1" style={{ color: '#2d3748', fontSize: '0.875rem' }}>
+                        Email Address <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        value={form.email}
+                        onChange={handleInputChange}
+                        required
+                        placeholder="your.email@example.com"
+                        style={{ 
+                          borderRadius: '8px', 
+                          border: '1px solid rgba(135, 206, 250, 0.4)', 
+                          fontSize: '0.875rem',
+                          padding: '0.5rem 0.75rem',
+                          background: 'rgba(255, 255, 255, 0.6)',
+                          transition: 'all 0.3s ease'
+                        }}
+                        onFocus={(e) => {
+                          e.target.style.background = 'rgba(255, 255, 255, 0.9)';
+                          e.target.style.borderColor = 'rgba(135, 206, 250, 0.7)';
+                          e.target.style.boxShadow = '0 0 0 3px rgba(135, 206, 250, 0.2)';
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.background = 'rgba(255, 255, 255, 0.6)';
+                          e.target.style.borderColor = 'rgba(135, 206, 250, 0.4)';
+                          e.target.style.boxShadow = 'none';
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="row g-2">
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold mb-1" style={{ color: '#2d3748', fontSize: '0.875rem' }}>
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        className="form-control"
+                        name="phone"
+                        value={form.phone}
+                        onChange={handleInputChange}
+                        placeholder="+91 123 456 7890"
+                        style={{ 
+                          borderRadius: '8px', 
+                          border: '1px solid rgba(135, 206, 250, 0.4)', 
+                          fontSize: '0.875rem',
+                          padding: '0.5rem 0.75rem',
+                          background: 'rgba(255, 255, 255, 0.6)',
+                          transition: 'all 0.3s ease'
+                        }}
+                        onFocus={(e) => {
+                          e.target.style.background = 'rgba(255, 255, 255, 0.9)';
+                          e.target.style.borderColor = 'rgba(135, 206, 250, 0.7)';
+                          e.target.style.boxShadow = '0 0 0 3px rgba(135, 206, 250, 0.2)';
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.background = 'rgba(255, 255, 255, 0.6)';
+                          e.target.style.borderColor = 'rgba(135, 206, 250, 0.4)';
+                          e.target.style.boxShadow = 'none';
+                        }}
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold mb-1" style={{ color: '#2d3748', fontSize: '0.875rem' }}>
+                        Subject <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="subject"
+                        value={form.subject}
+                        onChange={handleInputChange}
+                        required
+                        placeholder="What is this regarding?"
+                        style={{ 
+                          borderRadius: '8px', 
+                          border: '1px solid rgba(135, 206, 250, 0.4)', 
+                          fontSize: '0.875rem',
+                          padding: '0.5rem 0.75rem',
+                          background: 'rgba(255, 255, 255, 0.6)',
+                          transition: 'all 0.3s ease'
+                        }}
+                        onFocus={(e) => {
+                          e.target.style.background = 'rgba(255, 255, 255, 0.9)';
+                          e.target.style.borderColor = 'rgba(135, 206, 250, 0.7)';
+                          e.target.style.boxShadow = '0 0 0 3px rgba(135, 206, 250, 0.2)';
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.background = 'rgba(255, 255, 255, 0.6)';
+                          e.target.style.borderColor = 'rgba(135, 206, 250, 0.4)';
+                          e.target.style.boxShadow = 'none';
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="form-label fw-semibold mb-1" style={{ color: '#2d3748', fontSize: '0.875rem' }}>
+                      Message <span className="text-danger">*</span>
+                    </label>
+                    <textarea
                       className="form-control"
-                      name="name"
-                      value={form.name}
+                      name="message"
+                      value={form.message}
                       onChange={handleInputChange}
                       required
-                      placeholder="Enter your full name"
-                      style={{ borderRadius: '6px', border: '1px solid #e1e5eb', fontSize: '0.95rem' }}
+                      rows="5"
+                      placeholder="Tell us how we can help you..."
+                      style={{ 
+                        borderRadius: '8px', 
+                        border: '1px solid rgba(135, 206, 250, 0.4)', 
+                        fontSize: '0.875rem', 
+                        resize: 'vertical',
+                        padding: '0.5rem 0.75rem',
+                        background: 'rgba(255, 255, 255, 0.6)',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.background = 'rgba(255, 255, 255, 0.9)';
+                        e.target.style.borderColor = 'rgba(135, 206, 250, 0.7)';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(135, 206, 250, 0.2)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.background = 'rgba(255, 255, 255, 0.6)';
+                        e.target.style.borderColor = 'rgba(135, 206, 250, 0.4)';
+                        e.target.style.boxShadow = 'none';
+                      }}
                     />
                   </div>
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold">Email Address <span className="text-danger">*</span></label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      name="email"
-                      value={form.email}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="your.email@example.com"
-                      style={{ borderRadius: '6px', border: '1px solid #e1e5eb', fontSize: '0.95rem' }}
-                    />
-                  </div>
-                </div>
 
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold">Phone Number</label>
-                    <input
-                      type="tel"
-                      className="form-control"
-                      name="phone"
-                      value={form.phone}
-                      onChange={handleInputChange}
-                      placeholder="+91 123 456 7890"
-                      style={{ borderRadius: '6px', border: '1px solid #e1e5eb', fontSize: '0.95rem' }}
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold">Subject <span className="text-danger">*</span></label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="subject"
-                      value={form.subject}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="What is this regarding?"
-                      style={{ borderRadius: '6px', border: '1px solid #e1e5eb', fontSize: '0.95rem' }}
-                    />
-                  </div>
-                </div>
+                  {status === 'ok' && (
+                    <div className="alert alert-success d-flex align-items-center" role="alert" style={{ borderRadius: '10px' }}>
+                      <FaCheckCircle className="me-2" /> Message sent successfully! We'll get back to you soon.
+                    </div>
+                  )}
 
-                <div>
-                  <label className="form-label fw-semibold">Message <span className="text-danger">*</span></label>
-                  <textarea
-                    className="form-control"
-                    name="message"
-                    value={form.message}
-                    onChange={handleInputChange}
-                    required
-                    rows="6"
-                    placeholder="Tell us how we can help you..."
-                    style={{ borderRadius: '6px', border: '1px solid #e1e5eb', fontSize: '0.95rem', resize: 'vertical' }}
-                  />
-                </div>
+                  {status === 'error' && (
+                    <div className="alert alert-danger" role="alert" style={{ borderRadius: '10px' }}>
+                      Something went wrong. Please try again or contact us directly.
+                    </div>
+                  )}
 
-                {status === 'ok' && (
-                  <div className="alert alert-success d-flex align-items-center" role="alert" style={{ borderRadius: '8px' }}>
-                    <FaCheckCircle className="me-2" /> Message sent successfully! We'll get back to you soon.
-                  </div>
-                )}
-
-                {status === 'error' && (
-                  <div className="alert alert-danger" role="alert" style={{ borderRadius: '8px' }}>
-                    Something went wrong. Please try again or contact us directly.
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  className="btn align-self-start"
-                  disabled={status === 'loading'}
-                  style={{
-                    backgroundColor: '#123964',
-                    color: '#fff',
-                    borderRadius: '6px',
-                    fontSize: '0.95rem',
-                    padding: '10px 22px',
-                    transition: 'opacity 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    if (status !== 'loading') {
-                      e.target.style.opacity = '0.85';
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (status !== 'loading') {
-                      e.target.style.opacity = '1';
-                    }
-                  }}
-                >
-                  {status === 'loading' ? 'Sending...' : 'Send Message'}
-                </button>
-              </form>
+                  <button
+                    type="submit"
+                    className="btn align-self-start"
+                    disabled={status === 'loading'}
+                    style={{
+                      backgroundColor: '#123964',
+                      color: '#fff',
+                      borderRadius: '8px',
+                      fontSize: '0.875rem',
+                      fontWeight: '600',
+                      padding: '0.625rem 1.5rem',
+                      transition: 'all 0.3s ease',
+                      border: 'none',
+                      boxShadow: '0 2px 8px rgba(18, 57, 100, 0.25)'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (status !== 'loading') {
+                        e.target.style.transform = 'translateY(-1px)';
+                        e.target.style.boxShadow = '0 4px 12px rgba(18, 57, 100, 0.35)';
+                        e.target.style.opacity = '0.95';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (status !== 'loading') {
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = '0 2px 8px rgba(18, 57, 100, 0.25)';
+                        e.target.style.opacity = '1';
+                      }
+                    }}
+                  >
+                    {status === 'loading' ? 'Sending...' : 'Send Message'}
+                  </button>
+                </form>
+              </div>
             </motion.div>
 
             {/* Map */}
             <motion.div
-              className="col-lg-5"
+              className="col-lg-6"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div style={{ minHeight: '400px' }}>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.1234567890123!2d77.209023!3d28.613939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM2JzUwLjIiTiA3N8KwMTInMzIuNSJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, minHeight: '400px' }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Techworth Office Location"
-                ></iframe>
-              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.1234567890123!2d77.209023!3d28.613939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM2JzUwLjIiTiA3N8KwMTInMzIuNSJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0, borderRadius: '10px', minHeight: '400px' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Techworth Office Location"
+              ></iframe>
             </motion.div>
           </div>
         </div>
