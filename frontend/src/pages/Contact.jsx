@@ -94,37 +94,37 @@ export default function Contact() {
             className="row g-4 text-center text-md-start"
           >
             {[
-              {
-                gif: locationGif,
-                title: 'Visit Us',
-                content: (
-                  <p className="text-muted mb-0" style={{ fontSize: '0.95rem', lineHeight: '1.7' }}>
-                    Techworth Private Limited<br />
-                    123 Business Park, Tech Hub<br />
-                    City, State 12345, India
-                  </p>
-                )
-              },
-              {
-                gif: phoneGif,
-                title: 'Call Us',
-                content: (
-                  <div className="d-flex flex-column gap-1">
-                    <a href="tel:+911234567890" className="text-decoration-none" style={{ color: '#6c757d', fontSize: '0.95rem' }}>+91 123 456 7890</a>
-                    <a href="tel:+911234567891" className="text-decoration-none" style={{ color: '#6c757d', fontSize: '0.95rem' }}>+91 123 456 7891</a>
-                  </div>
-                )
-              },
-              {
-                gif: emailGif,
-                title: 'Email Us',
-                content: (
-                  <div className="d-flex flex-column gap-1">
-                    <a href="mailto:info@techworth.co.in" className="text-decoration-none" style={{ color: '#6c757d', fontSize: '0.95rem' }}>info@techworth.co.in</a>
-                    <a href="mailto:support@techworth.co.in" className="text-decoration-none" style={{ color: '#6c757d', fontSize: '0.95rem' }}>support@techworth.co.in</a>
-                  </div>
-                )
-              },
+                              {
+                  gif: locationGif,
+                  title: 'Visit Us',
+                  content: (
+                    <p className="text-muted mb-0" style={{ fontSize: '0.95rem', lineHeight: '1.7' }}>
+                      Techworth Private Limited<br />
+                      Tumu's, Rajani Residency #36<br />
+                      opposite ITC limited, Bachupally<br />
+                      Hyderabad, Telangana 502325, India
+                    </p>
+                  )
+                },
+                {
+                  gif: phoneGif,
+                  title: 'Call Us',
+                  content: (
+                    <div className="d-flex flex-column gap-1">
+                      <a href="tel:+919949981161" className="text-decoration-none" style={{ color: '#6c757d', fontSize: '0.95rem' }}>+91 9949981161</a>
+                      <a href="tel:+447448181817" className="text-decoration-none" style={{ color: '#6c757d', fontSize: '0.95rem' }}>+44 7448181817</a>
+                    </div>
+                  )
+                },
+                {
+                  gif: emailGif,
+                  title: 'Email Us',
+                  content: (
+                    <div className="d-flex flex-column gap-1">
+                      <a href="mailto:techworh.info" className="text-decoration-none" style={{ color: '#6c757d', fontSize: '0.95rem' }}>techworh.info</a>
+                    </div>
+                  )
+                },
               {
                 gif: timeGif,
                 title: 'Business Hours',
@@ -405,25 +405,25 @@ export default function Contact() {
               </div>
             </motion.div>
 
-            {/* Map */}
-            <motion.div
-              className="col-lg-6"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.1234567890123!2d77.209023!3d28.613939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM2JzUwLjIiTiA3N8KwMTInMzIuNSJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0, borderRadius: '10px', minHeight: '400px' }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Techworth Office Location"
-              ></iframe>
-            </motion.div>
+                          {/* Map */}
+              <motion.div
+                className="col-lg-6"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                                                                   <iframe
+                    src="https://www.google.com/maps?q=Tumu's,+Rajani+Residency+%2336,+opposite+ITC+limited,+Bachupally,+Hyderabad,+Telangana+502325&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, borderRadius: '10px', minHeight: '400px' }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Techworth Office Location - Tumu's, Rajani Residency #36, Bachupally, Hyderabad"
+                  ></iframe>
+              </motion.div>
           </div>
         </div>
       </section>

@@ -170,15 +170,18 @@ export default function Footer() {
             <ul className="list-unstyled small">
               <li className="mb-2 d-flex align-items-start gap-2">
                 <FaEnvelope className="mt-1 text-dark" />
-                <span className="text-muted">info@techworth.co.in</span>
+                <a href="mailto:techworh.info" className="text-muted text-decoration-none">techworh.info</a>
               </li>
               <li className="mb-2 d-flex align-items-start gap-2">
                 <FaPhone className="mt-1 text-dark" />
-                <span className="text-muted">+91 9XXXXXXXXX</span>
+                <div className="d-flex flex-column">
+                  <a href="tel:+919949981161" className="text-muted text-decoration-none mb-1">+91 9949981161</a>
+                  <a href="tel:+447448181817" className="text-muted text-decoration-none">+44 7448181817</a>
+                </div>
               </li>
               <li className="mb-2 d-flex align-items-start gap-2">
                 <FaMapMarkerAlt className="mt-1 text-dark" />
-                <span className="text-muted">Plot No. XX, Business Tower, Hyderabad, Telangana, India</span>
+                <span className="text-muted">Tumu's, Rajani Residency #36, opposite ITC limited, Bachupally, Hyderabad, Telangana 502325</span>
               </li>
             </ul>
           </div>
