@@ -101,19 +101,47 @@ exports.updateApplicationStatus = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid status' });
     }
 
-    const [result] = await pool.execute(
-      'UPDATE job_applications SET status = ?, admin_notes = ? WHERE id = ?',
-      [status, admin_notes || null, req.params.id]
-    );
+    // Check if admin_notes column exists, if not update without it
+    try {
+      // Try to update with admin_notes
+      const [result] = await pool.execute(
+        'UPDATE job_applications SET status = ?, admin_notes = ? WHERE id = ?',
+        [status, admin_notes || null, req.params.id]
+      );
 
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ success: false, message: 'Application not found' });
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ success: false, message: 'Application not found' });
+      }
+
+      res.json({ success: true, message: 'Application status updated successfully' });
+    } catch (err) {
+      // If admin_notes column doesn't exist, update without it
+      if (err.code === 'ER_BAD_FIELD_ERROR' && err.message.includes('admin_notes')) {
+        console.warn('admin_notes column not found, updating status only. Please run migration.');
+        const [result] = await pool.execute(
+          'UPDATE job_applications SET status = ? WHERE id = ?',
+          [status, req.params.id]
+        );
+
+        if (result.affectedRows === 0) {
+          return res.status(404).json({ success: false, message: 'Application not found' });
+        }
+
+        res.json({ 
+          success: true, 
+          message: 'Application status updated successfully (admin_notes column not available)' 
+        });
+      } else {
+        throw err;
+      }
     }
-
-    res.json({ success: true, message: 'Application status updated successfully' });
   } catch (error) {
     console.error('Update application status error:', error);
-    res.status(500).json({ success: false, message: 'Failed to update application status' });
+    res.status(500).json({ 
+      success: false, 
+      message: 'Failed to update application status',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 };
 

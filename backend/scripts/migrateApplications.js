@@ -59,6 +59,7 @@ async function migrateApplications() {
     await addColumnIfNotExists('job_applications', 'experience_text', 'TEXT');
     await addColumnIfNotExists('job_applications', 'skills', 'TEXT');
     await addColumnIfNotExists('job_applications', 'technologies', 'TEXT');
+    await addColumnIfNotExists('job_applications', 'admin_notes', 'TEXT');
     
     // Ensure status column has correct enum values
     try {

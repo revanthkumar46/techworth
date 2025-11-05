@@ -56,6 +56,7 @@ async function fixDatabase() {
     await addColumnIfNotExists('job_applications', 'experience_text', 'TEXT');
     await addColumnIfNotExists('job_applications', 'skills', 'TEXT');
     await addColumnIfNotExists('job_applications', 'technologies', 'TEXT');
+    await addColumnIfNotExists('job_applications', 'admin_notes', 'TEXT');
     
     // Ensure status column exists with correct enum values
     try {
