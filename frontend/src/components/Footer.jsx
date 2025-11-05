@@ -34,24 +34,12 @@ export default function Footer() {
               <li className="mb-2">
                 <Link 
                   to="/" 
-                  className="text-decoration-none"
+                  className="text-decoration-none footer-quick-link"
                   style={{ 
                     color: '#2E4374',
-                    transition: 'all 0.3s ease',
                     display: 'inline-block',
-                    textDecoration: 'none'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#1a2f5a';
-                    e.currentTarget.style.textDecoration = 'underline';
-                    e.currentTarget.style.textDecorationThickness = '1.5px';
-                    e.currentTarget.style.textUnderlineOffset = '3px';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#2E4374';
-                    e.currentTarget.style.textDecoration = 'none';
-                    e.currentTarget.style.textDecorationThickness = '';
-                    e.currentTarget.style.textUnderlineOffset = '';
+                    textDecoration: 'none',
+                    position: 'relative'
                   }}
                 >
                   Home
@@ -60,24 +48,12 @@ export default function Footer() {
               <li className="mb-2">
                 <Link 
                   to="/about" 
-                  className="text-decoration-none"
+                  className="text-decoration-none footer-quick-link"
                   style={{ 
                     color: '#2E4374',
-                    transition: 'all 0.3s ease',
                     display: 'inline-block',
-                    textDecoration: 'none'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#1a2f5a';
-                    e.currentTarget.style.textDecoration = 'underline';
-                    e.currentTarget.style.textDecorationThickness = '1.5px';
-                    e.currentTarget.style.textUnderlineOffset = '3px';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#2E4374';
-                    e.currentTarget.style.textDecoration = 'none';
-                    e.currentTarget.style.textDecorationThickness = '';
-                    e.currentTarget.style.textUnderlineOffset = '';
+                    textDecoration: 'none',
+                    position: 'relative'
                   }}
                 >
                   About
@@ -86,24 +62,12 @@ export default function Footer() {
               <li className="mb-2">
                 <Link 
                   to="/services" 
-                  className="text-decoration-none"
+                  className="text-decoration-none footer-quick-link"
                   style={{ 
                     color: '#2E4374',
-                    transition: 'all 0.3s ease',
                     display: 'inline-block',
-                    textDecoration: 'none'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#1a2f5a';
-                    e.currentTarget.style.textDecoration = 'underline';
-                    e.currentTarget.style.textDecorationThickness = '1.5px';
-                    e.currentTarget.style.textUnderlineOffset = '3px';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#2E4374';
-                    e.currentTarget.style.textDecoration = 'none';
-                    e.currentTarget.style.textDecorationThickness = '';
-                    e.currentTarget.style.textUnderlineOffset = '';
+                    textDecoration: 'none',
+                    position: 'relative'
                   }}
                 >
                   Services
@@ -112,24 +76,12 @@ export default function Footer() {
               <li className="mb-2">
                 <Link 
                   to="/careers" 
-                  className="text-decoration-none"
+                  className="text-decoration-none footer-quick-link"
                   style={{ 
                     color: '#2E4374',
-                    transition: 'all 0.3s ease',
                     display: 'inline-block',
-                    textDecoration: 'none'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#1a2f5a';
-                    e.currentTarget.style.textDecoration = 'underline';
-                    e.currentTarget.style.textDecorationThickness = '1.5px';
-                    e.currentTarget.style.textUnderlineOffset = '3px';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#2E4374';
-                    e.currentTarget.style.textDecoration = 'none';
-                    e.currentTarget.style.textDecorationThickness = '';
-                    e.currentTarget.style.textUnderlineOffset = '';
+                    textDecoration: 'none',
+                    position: 'relative'
                   }}
                 >
                   Careers
@@ -138,24 +90,12 @@ export default function Footer() {
               <li className="mb-2">
                 <Link 
                   to="/contact" 
-                  className="text-decoration-none"
+                  className="text-decoration-none footer-quick-link"
                   style={{ 
                     color: '#2E4374',
-                    transition: 'all 0.3s ease',
                     display: 'inline-block',
-                    textDecoration: 'none'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#1a2f5a';
-                    e.currentTarget.style.textDecoration = 'underline';
-                    e.currentTarget.style.textDecorationThickness = '1.5px';
-                    e.currentTarget.style.textUnderlineOffset = '3px';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#2E4374';
-                    e.currentTarget.style.textDecoration = 'none';
-                    e.currentTarget.style.textDecorationThickness = '';
-                    e.currentTarget.style.textUnderlineOffset = '';
+                    textDecoration: 'none',
+                    position: 'relative'
                   }}
                 >
                   Contact

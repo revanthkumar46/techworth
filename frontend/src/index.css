@@ -112,6 +112,58 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  /* Footer Quick Links Underline Hover Effect */
+  .footer-quick-link {
+    transition: color 0.3s ease;
+  }
+  
+  .footer-quick-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #2E4374;
+    transition: width 0.3s ease;
+  }
+  
+  .footer-quick-link:hover {
+    color: #1a2f5a;
+  }
+  
+  .footer-quick-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Navbar Links Underline Hover Effect */
+  .nav-link {
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    width: 0;
+    height: 2px;
+    background-color: #2E4374;
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: calc(100% - 24px);
+  }
+  
+  .nav-link:hover:not(.text-tech-primary) {
+    color: #1a2f5a !important;
+  }
+  
+  .nav-link:hover span {
+    color: #1a2f5a !important;
+  }
 
   /* Glass morphism utilities */
   .glass-blue {

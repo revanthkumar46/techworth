@@ -1,35 +1,45 @@
 const { validationResult } = require('express-validator');
 const pool = require('../config/db');
 
-const parseJSONColumn = (value) => {
-  if (Array.isArray(value)) return value;
+const parseRequirements = (value) => {
+  if (!value) return [];
   if (typeof value === 'string') {
-    try {
-      return JSON.parse(value);
-    } catch (err) {
-      return [];
-    }
+    // Split by bullet points or newlines
+    return value
+      .split(/[•\n]/)
+      .map(item => item.trim())
+      .filter(item => item.length > 0);
   }
   return [];
 };
 
-const mapJobRow = (row) => ({
-  id: row.id,
-  title: row.title,
-  category: row.category,
-  location: row.location,
-  type: row.job_type,
-  experience: row.experience,
-  description: row.description,
-  requirements: parseJSONColumn(row.requirements),
-  skills: parseJSONColumn(row.skills),
-  technologies: parseJSONColumn(row.technologies),
-  createdAt: row.created_at
-});
+const mapJobRow = (row) => {
+  const requirements = parseRequirements(row.requirements);
+  return {
+    id: row.id,
+    title: row.title,
+    category: row.category || '',
+    location: row.location || '',
+    type: row.job_type || 'full_time',
+    experience: '', // Not in jobs table, will be empty
+    description: row.description || '',
+    requirements: requirements,
+    skills: [], // Not in jobs table structure
+    technologies: [], // Not in jobs table structure
+    salaryRange: row.salary_range || '',
+    status: row.status || 'active',
+    applicationDeadline: row.application_deadline || null,
+    createdAt: row.created_at
+  };
+};
 
 exports.getJobs = async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM job_openings ORDER BY created_at DESC');
+    // Get only active jobs for public display
+    const [rows] = await pool.query(
+      'SELECT * FROM jobs WHERE status = ? ORDER BY created_at DESC',
+      ['active']
+    );
     res.json(rows.map(mapJobRow));
   } catch (err) {
     console.error('Job fetch error:', err.message, err.stack);
@@ -39,7 +49,10 @@ exports.getJobs = async (req, res) => {
 
 exports.getJobById = async (req, res) => {
   try {
-    const [rows] = await pool.query('SELECT * FROM job_openings WHERE id = ?', [req.params.id]);
+    const [rows] = await pool.query(
+      'SELECT * FROM jobs WHERE id = ? AND status = ?',
+      [req.params.id, 'active']
+    );
     if (rows.length === 0) return res.status(404).json({ message: 'Job not found' });
     res.json(mapJobRow(rows[0]));
   } catch (err) {
@@ -52,26 +65,30 @@ exports.createJob = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-  const { title, category, location, type, experience, description, requirements, skills, technologies } = req.body;
+  const { title, category, location, type, experience, description, requirements, skills, technologies, salaryRange, status, applicationDeadline } = req.body;
 
   try {
+    const requirementsText = Array.isArray(requirements)
+      ? requirements.map(r => `• ${r}`).join('\n')
+      : (requirements || '');
+
     const [result] = await pool.execute(
-      `INSERT INTO job_openings (title, category, location, job_type, experience, description, requirements, skills, technologies)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)` ,
+      `INSERT INTO jobs (title, category, location, job_type, description, requirements, salary_range, status, application_deadline)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         title,
-        category,
-        location,
-        type,
-        experience,
-        description,
-        JSON.stringify(requirements || []),
-        JSON.stringify(skills || []),
-        JSON.stringify(technologies || [])
+        category || '',
+        location || '',
+        type || 'full_time',
+        description || '',
+        requirementsText,
+        salaryRange || null,
+        status || 'draft',
+        applicationDeadline || null
       ]
     );
 
-    res.status(201).json({ id: result.insertId });
+    res.status(201).json({ id: result.insertId, message: 'Job created successfully' });
   } catch (err) {
     console.error('Job create error:', err.message, err.stack);
     res.status(500).json({ message: 'Failed to create job' });
@@ -82,27 +99,31 @@ exports.updateJob = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-  const { title, category, location, type, experience, description, requirements, skills, technologies } = req.body;
+  const { title, category, location, type, experience, description, requirements, skills, technologies, salaryRange, status, applicationDeadline } = req.body;
 
   try {
+    const requirementsText = Array.isArray(requirements)
+      ? requirements.map(r => `• ${r}`).join('\n')
+      : (requirements || '');
+
     const [result] = await pool.execute(
-      `UPDATE job_openings SET title=?, category=?, location=?, job_type=?, experience=?, description=?, requirements=?, skills=?, technologies=? WHERE id=?`,
+      `UPDATE jobs SET title=?, category=?, location=?, job_type=?, description=?, requirements=?, salary_range=?, status=?, application_deadline=? WHERE id=?`,
       [
         title,
-        category,
-        location,
-        type,
-        experience,
-        description,
-        JSON.stringify(requirements || []),
-        JSON.stringify(skills || []),
-        JSON.stringify(technologies || []),
+        category || '',
+        location || '',
+        type || 'full_time',
+        description || '',
+        requirementsText,
+        salaryRange || null,
+        status || 'draft',
+        applicationDeadline || null,
         req.params.id
       ]
     );
 
     if (result.affectedRows === 0) return res.status(404).json({ message: 'Job not found' });
-    res.json({ message: 'Job updated' });
+    res.json({ message: 'Job updated successfully' });
   } catch (err) {
     console.error('Job update error:', err.message, err.stack);
     res.status(500).json({ message: 'Failed to update job' });
@@ -111,9 +132,9 @@ exports.updateJob = async (req, res) => {
 
 exports.deleteJob = async (req, res) => {
   try {
-    const [result] = await pool.execute('DELETE FROM job_openings WHERE id = ?', [req.params.id]);
+    const [result] = await pool.execute('DELETE FROM jobs WHERE id = ?', [req.params.id]);
     if (result.affectedRows === 0) return res.status(404).json({ message: 'Job not found' });
-    res.json({ message: 'Job deleted' });
+    res.json({ message: 'Job deleted successfully' });
   } catch (err) {
     console.error('Job delete error:', err.message, err.stack);
     res.status(500).json({ message: 'Failed to delete job' });

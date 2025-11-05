@@ -1,23 +1,32 @@
-const express = require('express');
-const cors = require('cors');
+// Load environment variables FIRST, before any other imports that use them
 const dotenv = require('dotenv');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
-const nodemailer = require('nodemailer');
-const path = require('path');
-
 dotenv.config();
 
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const cookieParser = require('cookie-parser');
+const nodemailer = require('nodemailer');
+const path = require('path');
 const pool = require('./config/db');
 
 const app = express();
-app.use(helmet());
+
+// CORS must be configured before other middleware
+app.use(cors({
+  origin: process.env.ORIGIN || 'http://localhost:3000',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
+app.use(cookieParser());
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true, limit: '2mb' }));
-
-app.use(cors({
-  origin: process.env.ORIGIN || 'http://localhost:3000'
-}));
 
 app.use(rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -52,6 +61,28 @@ app.use('/api/jobs', jobsRouter);
 // Applications API
 const applicationsRouter = require('./routes/applications');
 app.use('/api/applications', applicationsRouter);
+
+// Admin API Routes
+const adminAuthRouter = require('./routes/admin/auth');
+app.use('/api/admin/auth', adminAuthRouter);
+
+const adminDashboardRouter = require('./routes/admin/dashboard');
+app.use('/api/admin/dashboard', adminDashboardRouter);
+
+const adminJobsRouter = require('./routes/admin/jobs');
+app.use('/api/admin/jobs', adminJobsRouter);
+
+const adminContactsRouter = require('./routes/admin/contacts');
+app.use('/api/admin/contacts', adminContactsRouter);
+
+const adminApplicationsRouter = require('./routes/admin/applications');
+app.use('/api/admin/applications', adminApplicationsRouter);
+
+const adminNewsletterRouter = require('./routes/admin/newsletter');
+app.use('/api/admin/newsletter', adminNewsletterRouter);
+
+const adminSettingsRouter = require('./routes/admin/settings');
+app.use('/api/admin/settings', adminSettingsRouter);
 
 // Global error handler
 app.use((err, req, res, next) => {

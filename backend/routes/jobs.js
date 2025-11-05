@@ -6,14 +6,14 @@ const router = Router();
 
 const jobValidators = [
   body('title').trim().notEmpty().withMessage('Title is required'),
-  body('category').trim().notEmpty().withMessage('Category is required'),
-  body('location').trim().notEmpty().withMessage('Location is required'),
-  body('type').trim().notEmpty().withMessage('Job type is required'),
-  body('experience').trim().notEmpty().withMessage('Experience is required'),
   body('description').trim().isLength({ min: 20 }).withMessage('Description must be at least 20 characters'),
-  body('requirements').optional().isArray().withMessage('Requirements must be an array'),
-  body('skills').optional().isArray().withMessage('Skills must be an array'),
-  body('technologies').optional().isArray().withMessage('Technologies must be an array')
+  body('category').optional().trim(),
+  body('location').optional().trim(),
+  body('type').optional().isIn(['full_time', 'part_time', 'contract', 'internship']).withMessage('Invalid job type'),
+  body('requirements').optional(),
+  body('salaryRange').optional().trim(),
+  body('status').optional().isIn(['draft', 'active', 'closed']).withMessage('Invalid status'),
+  body('applicationDeadline').optional().isISO8601().withMessage('Invalid date format')
 ];
 
 router.get('/', getJobs);

@@ -8,7 +8,6 @@ export default function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const [showServices, setShowServices] = useState(false);
   const [isServicesHover, setIsServicesHover] = useState(false);
-  const [hoveredNav, setHoveredNav] = useState('');
   const [hoveredServiceKey, setHoveredServiceKey] = useState('');
 
   const serviceLinks = [
@@ -40,16 +39,18 @@ export default function Navbar() {
               to="/"
               end
               className={({ isActive }) =>
-                `text-decoration-none px-3 py-2 rounded ${isActive ? 'text-tech-primary fw-semibold' : 'text-dark'}`
+                `nav-link text-decoration-none px-3 py-2 rounded ${isActive ? 'text-tech-primary fw-semibold' : 'text-dark'}`
               }
+              style={{ position: 'relative' }}
             >
               Home
             </NavLink>
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                `text-decoration-none px-3 py-2 rounded ${isActive ? 'text-tech-primary fw-semibold' : 'text-dark'}`
+                `nav-link text-decoration-none px-3 py-2 rounded ${isActive ? 'text-tech-primary fw-semibold' : 'text-dark'}`
               }
+              style={{ position: 'relative' }}
             >
               About
             </NavLink>
@@ -67,11 +68,11 @@ export default function Navbar() {
               <NavLink
                 to="/services"
                 className={({ isActive }) =>
-                  `text-decoration-none px-3 py-2 rounded d-inline-flex align-items-center ${
+                  `nav-link text-decoration-none px-3 py-2 rounded d-inline-flex align-items-center ${
                     isActive ? 'fw-semibold' : ''
                   }`
                 }
-                style={{ color: 'inherit' }}
+                style={{ color: 'inherit', position: 'relative' }}
               >
                 <span className={isServicesHover ? 'text-tech-primary' : 'text-dark'}>Services</span>
                 <FaSort className={`ms-2 ${isServicesHover ? 'text-dark' : 'text-tech-primary'}`} />
@@ -119,19 +120,18 @@ export default function Navbar() {
             <NavLink
               to="/careers"
               className={({ isActive }) =>
-                `text-decoration-none px-3 py-2 rounded ${isActive ? 'text-tech-primary fw-semibold' : 'text-dark'}`
+                `nav-link text-decoration-none px-3 py-2 rounded ${isActive ? 'text-tech-primary fw-semibold' : 'text-dark'}`
               }
+              style={{ position: 'relative' }}
             >
               Careers
             </NavLink>
             <NavLink
               to="/contact"
               className={({ isActive }) =>
-                `text-decoration-none px-3 py-2 rounded ${isActive ? 'text-tech-primary fw-semibold' : 'text-dark'}`
+                `nav-link text-decoration-none px-3 py-2 rounded ${isActive ? 'text-tech-primary fw-semibold' : 'text-dark'}`
               }
-              onMouseEnter={() => setHoveredNav('contact')}
-              onMouseLeave={() => setHoveredNav('')}
-              style={{ textDecoration: hoveredNav === 'contact' ? 'underline' : 'none' }}
+              style={{ position: 'relative' }}
             >
               Contact
             </NavLink>
@@ -152,14 +152,16 @@ export default function Navbar() {
             <NavLink
               to="/"
               end
-              className="d-block text-decoration-none px-3 py-2 text-dark"
+              className="nav-link d-block text-decoration-none px-3 py-2 text-dark"
+              style={{ position: 'relative' }}
               onClick={() => setShowMenu(false)}
             >
               Home
             </NavLink>
             <NavLink
               to="/about"
-              className="d-block text-decoration-none px-3 py-2 text-dark"
+              className="nav-link d-block text-decoration-none px-3 py-2 text-dark"
+              style={{ position: 'relative' }}
               onClick={() => setShowMenu(false)}
             >
               About
@@ -170,8 +172,8 @@ export default function Navbar() {
                 <Link
                   key={`mobile-${label}`}
                   to={to}
-                  className="d-flex align-items-center gap-2 text-decoration-none py-1"
-                  style={{ color: '#1f2937' }}
+                  className="nav-link d-flex align-items-center gap-2 text-decoration-none py-1"
+                  style={{ color: '#1f2937', position: 'relative' }}
                   onClick={() => setShowMenu(false)}
                 >
                   <Icon style={{ color: '#123964' }} /> <span>{label}</span>
@@ -179,7 +181,8 @@ export default function Navbar() {
               ))}
               <NavLink
                 to="/services"
-                className="d-block text-decoration-none text-dark mt-1"
+                className="nav-link d-block text-decoration-none text-dark mt-1"
+                style={{ position: 'relative' }}
                 onClick={() => setShowMenu(false)}
               >
                 All Services
@@ -187,14 +190,16 @@ export default function Navbar() {
             </div>
             <NavLink
               to="/careers"
-              className="d-block text-decoration-none px-3 py-2 text-dark"
+              className="nav-link d-block text-decoration-none px-3 py-2 text-dark"
+              style={{ position: 'relative' }}
               onClick={() => setShowMenu(false)}
             >
               Careers
             </NavLink>
             <NavLink
               to="/contact"
-              className="d-block text-decoration-none px-3 py-2 text-dark"
+              className="nav-link d-block text-decoration-none px-3 py-2 text-dark"
+              style={{ position: 'relative' }}
               onClick={() => setShowMenu(false)}
             >
               Contact
