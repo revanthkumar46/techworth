@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import axios from 'axios';
-import { FaSearch, FaSpinner, FaTrash, FaDownload, FaToggleOn, FaToggleOff } from 'react-icons/fa';
+import { FaSearch, FaSpinner, FaTrash, FaDownload, FaToggleOn, FaToggleOff, FaSync } from 'react-icons/fa';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
@@ -16,6 +16,16 @@ export default function AdminNewsletter() {
   useEffect(() => {
     fetchSubscribers();
   }, [currentPage, statusFilter, search]);
+
+  // Auto-refresh data every 30 seconds when on this page
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchSubscribers();
+    }, 30000); // Refresh every 30 seconds
+
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const fetchSubscribers = async () => {
     try {
@@ -73,10 +83,18 @@ export default function AdminNewsletter() {
     <AdminLayout>
       <div className="container-fluid">
         <div className="d-flex justify-content-between align-items-center mb-4">
-          <h2>Newsletter Subscribers</h2>
-          <button className="btn btn-primary" onClick={handleExport}>
-            <FaDownload /> Export CSV
-          </button>
+          <div>
+            <h2 className="mb-0">Newsletter Subscribers</h2>
+            <small className="text-muted">{pagination.total || 0} Total Subscribers</small>
+          </div>
+          <div className="d-flex gap-2">
+            <button className="btn btn-outline-primary" onClick={fetchSubscribers} title="Refresh">
+              <FaSync />
+            </button>
+            <button className="btn btn-primary" onClick={handleExport}>
+              <FaDownload /> Export CSV
+            </button>
+          </div>
         </div>
 
         <div className="row mb-3">
@@ -111,18 +129,23 @@ export default function AdminNewsletter() {
           </div>
         ) : (
           <>
-            <div className="table-responsive">
-              <table className="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th>Subscribed</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {subscribers.map((sub) => (
+            {subscribers.length === 0 ? (
+              <div className="text-center py-5 text-muted">
+                <p>No subscribers found</p>
+              </div>
+            ) : (
+              <div className="table-responsive">
+                <table className="table table-hover">
+                  <thead className="table-light">
+                    <tr>
+                      <th>Email</th>
+                      <th>Status</th>
+                      <th>Subscribed</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {subscribers.map((sub) => (
                     <tr key={sub.id}>
                       <td>{sub.email}</td>
                       <td>
@@ -148,11 +171,12 @@ export default function AdminNewsletter() {
                           </button>
                         </div>
                       </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
 
             {pagination.pages > 1 && (
               <nav>

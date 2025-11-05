@@ -62,6 +62,10 @@ app.use('/api/jobs', jobsRouter);
 const applicationsRouter = require('./routes/applications');
 app.use('/api/applications', applicationsRouter);
 
+// Newsletter API (Public)
+const newsletterRouter = require('./routes/newsletter');
+app.use('/api/newsletter', newsletterRouter);
+
 // Admin API Routes
 const adminAuthRouter = require('./routes/admin/auth');
 app.use('/api/admin/auth', adminAuthRouter);

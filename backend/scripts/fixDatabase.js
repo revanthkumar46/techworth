@@ -49,6 +49,11 @@ async function fixDatabase() {
       "ENUM('new', 'read', 'replied', 'archived') DEFAULT 'new'"
     );
 
+    // Add missing columns to newsletter_subscribers table
+    console.log('\n📋 Checking newsletter_subscribers table columns...');
+    await addColumnIfNotExists('newsletter_subscribers', 'is_active', 'BOOLEAN DEFAULT TRUE');
+    await addColumnIfNotExists('newsletter_subscribers', 'unsubscribed_at', 'TIMESTAMP NULL');
+
     // Add missing columns to job_applications table
     console.log('\n📋 Checking job_applications table columns...');
     await addColumnIfNotExists('job_applications', 'cover_letter_path', 'VARCHAR(500)');
