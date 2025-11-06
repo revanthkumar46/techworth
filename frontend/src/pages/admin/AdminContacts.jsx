@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import axios from 'axios';
-import { FaSearch, FaSpinner, FaEye, FaTrash, FaCheckCircle } from 'react-icons/fa';
+import { FaSearch, FaSpinner, FaEye, FaTrash } from 'react-icons/fa';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
@@ -14,11 +14,7 @@ export default function AdminContacts() {
   const [pagination, setPagination] = useState({ total: 0, pages: 1 });
   const [selectedContact, setSelectedContact] = useState(null);
 
-  useEffect(() => {
-    fetchContacts();
-  }, [currentPage, statusFilter, search]);
-
-  const fetchContacts = async () => {
+  const fetchContacts = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -41,7 +37,11 @@ export default function AdminContacts() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, statusFilter, search]);
+
+  useEffect(() => {
+    fetchContacts();
+  }, [fetchContacts]);
 
   const handleStatusChange = async (id, status) => {
     try {
@@ -227,4 +227,5 @@ export default function AdminContacts() {
     </AdminLayout>
   );
 }
+
 

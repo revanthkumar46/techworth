@@ -153,3 +153,4 @@ After setup:
 3. Customize job templates
 4. Set up email notifications for new applications
 
+

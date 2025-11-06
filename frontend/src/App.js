@@ -4,7 +4,6 @@ import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
 import { ContactModalProvider, useContactModal } from './contexts/ContactModalContext';
 import { AdminAuthProvider, useAdminAuth } from './contexts/AdminAuthContext';
-import AdminLayout from './components/admin/AdminLayout';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminJobs from './pages/admin/AdminJobs';

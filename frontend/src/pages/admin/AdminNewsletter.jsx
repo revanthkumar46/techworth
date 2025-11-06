@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import axios from 'axios';
 import { FaSearch, FaSpinner, FaTrash, FaDownload, FaToggleOn, FaToggleOff, FaSync } from 'react-icons/fa';
@@ -13,21 +13,7 @@ export default function AdminNewsletter() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState({ total: 0, pages: 1 });
 
-  useEffect(() => {
-    fetchSubscribers();
-  }, [currentPage, statusFilter, search]);
-
-  // Auto-refresh data every 30 seconds when on this page
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchSubscribers();
-    }, 30000); // Refresh every 30 seconds
-
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const fetchSubscribers = async () => {
+  const fetchSubscribers = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -50,7 +36,20 @@ export default function AdminNewsletter() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, statusFilter, search]);
+
+  useEffect(() => {
+    fetchSubscribers();
+  }, [fetchSubscribers]);
+
+  // Auto-refresh data every 30 seconds when on this page
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchSubscribers();
+    }, 30000); // Refresh every 30 seconds
+
+    return () => clearInterval(interval);
+  }, [fetchSubscribers]);
 
   const handleToggle = async (id) => {
     try {

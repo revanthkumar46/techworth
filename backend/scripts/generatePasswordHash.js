@@ -12,3 +12,4 @@ bcrypt.hash(password, 10, (err, hash) => {
   console.log('\nCopy the hash above and use it in the database schema or update statement.');
 });
 
+

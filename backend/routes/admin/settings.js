@@ -19,3 +19,4 @@ router.get('/activity-logs', getActivityLogs);
 
 module.exports = router;
 
+

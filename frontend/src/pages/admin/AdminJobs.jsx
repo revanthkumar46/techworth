@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import axios from 'axios';
-import { FaPlus, FaEdit, FaTrash, FaSearch, FaSpinner, FaEye } from 'react-icons/fa';
+import { FaPlus, FaEdit, FaTrash, FaSearch, FaSpinner } from 'react-icons/fa';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
@@ -26,11 +26,7 @@ export default function AdminJobs() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState({ total: 0, pages: 1 });
 
-  useEffect(() => {
-    fetchJobs();
-  }, [currentPage, statusFilter, search]);
-
-  const fetchJobs = async () => {
+  const fetchJobs = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -53,7 +49,11 @@ export default function AdminJobs() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, statusFilter, search]);
+
+  useEffect(() => {
+    fetchJobs();
+  }, [fetchJobs]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -372,4 +372,5 @@ export default function AdminJobs() {
     </AdminLayout>
   );
 }
+
 

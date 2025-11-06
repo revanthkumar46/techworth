@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { 
-	FaUsers,
-	FaBullseye, FaEye, FaTrophy,
-	FaUserTie, FaEnvelope, FaHeartbeat, FaLightbulb,
+	FaBullseye, FaEye, FaEnvelope, FaHeartbeat, FaLightbulb,
 	FaHandsHelping, FaBalanceScale, FaSmile, FaMedal
 } from 'react-icons/fa';
 import aboutHero1 from '../assets/about-hero1.jpg';
@@ -30,6 +28,8 @@ import experienceGif from '../assets/experience.gif';
 import supportGif from '../assets/support.gif';
 import logoOnly from '../assets/techworth-logo-only.png';
 import aboutSectionImage from '../assets/about-us-section2.png';
+import managingDirectorImg from '../assets/Managing-Director.jpg';
+import directorImg from '../assets/Director.jpg';
 
 const heroImages = [aboutHero1, aboutHero2];
 
@@ -283,17 +283,109 @@ export default function About() {
 					</motion.div>
 					<div className="row g-4">
 						{[
-							{ name: 'Rohit Sharma', role: 'Managing Director', email: 'managingdirector@techworth.co.in', icon: <FaUserTie /> },
-							{ name: 'Priya Mehta', role: 'Technical Director', email: 'director@techworth.co.in', icon: <FaTrophy /> },
-							{ name: 'Arjun Verma', role: 'HR & Marketing Manager', email: 'hr@techworth.co.in', icon: <FaUsers /> },
+							{ 
+								name: 'Anudeep Chennareddy', 
+								role: 'Managing Director', 
+								email: 'Anudeepchennareddy@gmail.com',
+								image: managingDirectorImg,
+								description: 'An accomplished IT professional with 8 years of experience across leading companies. Skilled in driving business growth, managing operations, and leading high-performing teams. Strong expertise in IT solutions, digital transformation, and client relations with proven results.'
+							},
+							{ 
+								name: 'Sandeep Chennareddy', 
+								role: 'Director', 
+								email: 'Sandeepchennareddy@gmail.com',
+								image: directorImg,
+								description: 'A dedicated software professional with 4 years of experience in software development, specializing in building efficient, scalable, and innovative solutions. Skilled in modern technologies and committed to driving quality, performance, and continuous improvement with proven results.'
+							},
+							{ 
+								name: 'Chandra Niveditha Divi', 
+								role: 'HR & Marketing Manager', 
+								email: 'Chandranivedhitha@gmail.com',
+								image: null,
+								description: 'An experienced professional with expertise in HR and Marketing, skilled in talent management, employee engagement, brand building, and digital marketing. Focused on driving business growth, creating strong workplace culture, and delivering impactful results consistently.'
+							},
 						].map((p) => (
-							<div key={p.name} className="col-md-4">
-								<motion.div variants={liftShadow} initial="initial" whileHover="hover" whileTap="tap" className="h-100 p-4 text-center" style={{ borderRadius: '12px', backgroundColor: '#ffffff', border: '1px solid #e9ecef' }}>
-									<div className="text-tech-primary mb-2" style={{ fontSize: '2rem' }}>{p.icon}</div>
-									<h5 className="fw-bold mb-1" style={{ fontSize: '1rem' }}>{p.name}</h5>
-									<div className="text-muted mb-2" style={{ fontSize: '0.9rem' }}>{p.role}</div>
-									<div className="d-inline-flex align-items-center gap-2 text-decoration-none" style={{ fontSize: '0.85rem' }}>
-										<FaEnvelope className="text-tech-primary" /> <span>{p.email}</span>
+							<div key={p.name} className="col-md-4 d-flex">
+								<motion.div 
+									variants={liftShadow} 
+									initial="initial" 
+									whileHover="hover" 
+									whileTap="tap" 
+									className="h-100 w-100 d-flex flex-column p-0" 
+									style={{ 
+										borderRadius: '8px', 
+										backgroundColor: '#ffffff', 
+										border: '1px solid #e9ecef',
+										minHeight: '460px',
+										overflow: 'hidden'
+									}}
+								>
+									{/* Image */}
+									<div 
+										className="w-100" 
+										style={{ 
+											height: '250px', 
+											overflow: 'hidden',
+											backgroundColor: '#f8f9fa',
+											borderRadius: '8px 8px 0 0',
+											display: 'flex',
+											alignItems: 'center',
+											justifyContent: 'center'
+										}}
+									>
+										{p.image ? (
+											<img 
+												src={p.image} 
+												alt={p.name} 
+												style={{ 
+													width: '100%', 
+													height: '100%', 
+													objectFit: 'contain',
+													objectPosition: 'center'
+												}} 
+											/>
+										) : (
+											<div 
+												className="d-flex align-items-center justify-content-center w-100 h-100"
+												style={{
+													backgroundColor: '#e9ecef',
+													color: '#6c757d'
+												}}
+											>
+												<span style={{ fontSize: '0.9rem', fontWeight: 500, opacity: 0.7 }}>Photo</span>
+											</div>
+										)}
+									</div>
+									
+									{/* Content */}
+									<div className="d-flex flex-column flex-grow-1 p-3" style={{ textAlign: 'left' }}>
+										<h5 className="fw-bold mb-1 text-center text-uppercase" style={{ fontSize: '0.95rem', color: '#2E4374', letterSpacing: '0.5px' }}>{p.name}</h5>
+										<div className="text-tech-primary mb-2 text-center" style={{ fontSize: '0.875rem', fontWeight: 500 }}>{p.role}</div>
+										<p 
+											className="text-muted mb-3 flex-grow-1" 
+											style={{ 
+												fontSize: '0.85rem', 
+												lineHeight: 1.6,
+												textAlign: 'left',
+												minHeight: '105px'
+											}}
+										>
+											{p.description}
+										</p>
+										<a 
+											href={`mailto:${p.email}`}
+											className="d-inline-flex align-items-center justify-content-center gap-2 text-decoration-none text-tech-primary"
+											style={{ 
+												fontSize: '0.8rem',
+												transition: 'opacity 0.2s',
+												marginTop: 'auto'
+											}}
+											onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+											onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+										>
+											<FaEnvelope style={{ fontSize: '0.85rem', flexShrink: 0 }} />
+											<span style={{ wordBreak: 'break-word' }}>{p.email}</span>
+										</a>
 									</div>
 								</motion.div>
 							</div>

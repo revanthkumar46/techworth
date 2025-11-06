@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import { FaCogs, FaLightbulb, FaRocket, FaHandsHelping, FaQuoteLeft } from 'react-icons/fa';
+import { FaCogs, FaLightbulb, FaRocket, FaHandsHelping } from 'react-icons/fa';
 import { useContactModal } from '../contexts/ContactModalContext';
 import heroImage from '../assets/our=services-hero.jpg';
 import createValueGif from '../assets/create-value.gif';
@@ -11,6 +11,10 @@ import webdevGif from '../assets/webdev-services.gif';
 import cloudGif from '../assets/cloud-services.gif';
 import mobileGif from '../assets/mobile-app-services.gif';
 import testingGif from '../assets/Testing-services.gif';
+import careerMonkImg from '../assets/career-monk.png';
+import divisPalaseImg from '../assets/Divis_Palase.jpg';
+import a2CloudImg from '../assets/A2-cloud-solutions.jpg';
+import flavourFiestaImg from '../assets/flavour_fiesta.png';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
@@ -83,23 +87,6 @@ const approachSteps = [
   }
 ];
 
-const testimonials = [
-  {
-    quote: 'Techworth accelerated our cloud migration with zero downtime, and our new platform scales effortlessly.',
-    author: 'Samantha Lee',
-    role: 'CTO, FinServe360'
-  },
-  {
-    quote: 'Their QA automation reduced our regression cycles by 70%. The team is proactive and detail-obsessed.',
-    author: 'Jeremy Collins',
-    role: 'Head of Engineering, RetailHub'
-  },
-  {
-    quote: 'From UX research to launch, Techworth has been a strategic partner who truly understands growth.',
-    author: 'Priya Nair',
-    role: 'Product Director, HealthSync'
-  }
-];
 
 const animatedHighlights = [
   {
@@ -434,76 +421,118 @@ export default function Services() {
           >
             <h6 className="text-tech-primary fw-bold" style={{ letterSpacing: '1px' }}>OUR CLIENTS</h6>
             <h2 className="text-dark" style={{ fontSize: '1.6rem' }}>Partnering with innovators across industries</h2>
-            <p className="text-muted" style={{ fontSize: '0.95rem' }}>
-              From fintech to healthcare, retail to SaaS, we build trusted relationships with teams shaping the future.
-            </p>
           </motion.div>
 
-          <div className="row g-4 justify-content-center">
-            {[
-              { name: 'FinServe360', tagline: 'AI-driven financial services' },
-              { name: 'HealthSync', tagline: 'Digital health platforms' },
-              { name: 'RetailHub', tagline: 'Omnichannel retail solutions' },
-              { name: 'EduPro Labs', tagline: 'Next-gen EdTech experiences' },
-              { name: 'AutoCore', tagline: 'Connected automotive services' },
-              { name: 'UrbanGrid', tagline: 'Smart city infrastructure' }
-            ].map((client, idx) => (
-              <motion.div
-                key={client.name}
-                className="col-6 col-md-4 col-lg-3 d-flex"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.05 }}
-              >
-                <div className="flex-fill text-center p-3 bg-light" style={{ borderRadius: '12px', border: '1px solid #e5e7eb' }}>
-                  <div className="fw-bold mb-1" style={{ color: '#123964', fontSize: '1.05rem' }}>{client.name}</div>
-                  <small className="text-muted" style={{ fontSize: '0.85rem' }}>{client.tagline}</small>
+          <div style={{ overflow: 'hidden', width: '100%', position: 'relative' }}>
+            <div
+              style={{
+                display: 'flex',
+                gap: '3rem',
+                animation: 'marquee 30s linear infinite',
+                width: 'fit-content'
+              }}
+            >
+              {[
+                { image: careerMonkImg, name: 'Career Monk', darkBg: true },
+                { image: divisPalaseImg, name: 'Divis Palase', darkBg: false },
+                { image: a2CloudImg, name: 'A2 Cloud Solutions', darkBg: false },
+                { image: flavourFiestaImg, name: 'Flavour Fiesta', darkBg: false },
+                { image: careerMonkImg, name: 'Career Monk', darkBg: true },
+                { image: divisPalaseImg, name: 'Divis Palase', darkBg: false },
+                { image: a2CloudImg, name: 'A2 Cloud Solutions', darkBg: false },
+                { image: flavourFiestaImg, name: 'Flavour Fiesta', darkBg: false }
+              ].map((client, idx) => (
+                <div
+                  key={`${client.name}-${idx}`}
+                  style={{
+                    flexShrink: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '180px',
+                    height: '100px'
+                  }}
+                >
+                  {client.darkBg ? (
+                    <div
+                      className="d-flex align-items-center justify-content-center"
+                      style={{
+                        borderRadius: '6px',
+                        backgroundColor: '#1a1a1a',
+                        border: '1px solid #333333',
+                        padding: '12px 20px',
+                        width: '100%',
+                        height: '100%',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                        e.currentTarget.style.borderColor = '#444444';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.boxShadow = 'none';
+                        e.currentTarget.style.borderColor = '#333333';
+                      }}
+                    >
+                      <img
+                        src={client.image}
+                        alt={client.name}
+                        style={{
+                          maxWidth: '100%',
+                          maxHeight: '70px',
+                          objectFit: 'contain',
+                          filter: 'grayscale(0%)',
+                          opacity: 1,
+                          transition: 'all 0.3s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.filter = 'grayscale(100%)';
+                          e.currentTarget.style.opacity = '0.7';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.filter = 'grayscale(0%)';
+                          e.currentTarget.style.opacity = '1';
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <img
+                      src={client.image}
+                      alt={client.name}
+                      style={{
+                        maxWidth: '100%',
+                        maxHeight: '70px',
+                        width: 'auto',
+                        height: 'auto',
+                        objectFit: 'contain',
+                        filter: 'grayscale(0%)',
+                        opacity: 1,
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.filter = 'grayscale(100%)';
+                        e.currentTarget.style.opacity = '0.7';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.filter = 'grayscale(0%)';
+                        e.currentTarget.style.opacity = '1';
+                      }}
+                    />
+                  )}
                 </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <SectionDivider />
-      <section className="py-5">
-        <div className="container mx-auto px-4" style={{ maxWidth: '1000px' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-4"
-          >
-            <h6 className="text-tech-primary fw-bold" style={{ letterSpacing: '1px' }}>CLIENT STORIES</h6>
-            <h2 className="text-dark" style={{ fontSize: '1.6rem' }}>Trusted by product and engineering leaders worldwide</h2>
-          </motion.div>
-
-          <div className="row g-4">
-            {testimonials.map((testimonial, idx) => (
-              <motion.div
-                key={testimonial.author}
-                className="col-12 col-md-4 d-flex"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.05 }}
-              >
-                <div className="flex-fill p-4 bg-light" style={{ borderRadius: '12px', border: '1px solid #e5e7eb' }}>
-                  <FaQuoteLeft style={{ fontSize: '1.3rem', color: '#2E4374', opacity: 0.8 }} className="mb-3" />
-                  <p className="text-muted" style={{ fontSize: '0.92rem', lineHeight: '1.7' }}>
-                    {testimonial.quote}
-                  </p>
-                  <div className="mt-3">
-                    <h6 className="fw-semibold mb-0" style={{ color: '#123964' }}>{testimonial.author}</h6>
-                    <small className="text-muted">{testimonial.role}</small>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <style>{`
+            @keyframes marquee {
+              0% {
+                transform: translateX(0);
+              }
+              100% {
+                transform: translateX(-50%);
+              }
+            }
+          `}</style>
         </div>
       </section>
 

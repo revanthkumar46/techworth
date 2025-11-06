@@ -69,3 +69,4 @@ const logActivity = async (req, res, next) => {
 
 module.exports = { authenticate, authorize, logActivity };
 
+
